@@ -13,7 +13,7 @@ import com.example.demo.models.Cart;
 @EnableMongoRepositories
 public interface CartRepo extends MongoRepository<Cart,ObjectId > {
 	
-	List<Cart> findByUserId(Integer userId);
+	List<Cart> findByUserId(String userId);
 	
 
 

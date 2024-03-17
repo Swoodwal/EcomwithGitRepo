@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class CartItem {
-	private Integer productId;
+	private String productId;
 	private Integer quantity;
 	private String deliveryDate;
 

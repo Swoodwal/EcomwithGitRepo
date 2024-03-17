@@ -24,7 +24,7 @@ public class Cart {
 	
 	@Id
 	private ObjectId cartId;
-	private Integer userId;
+	private String userId;
 	private ArrayList <CartItem> cts;
 	
 

@@ -19,6 +19,6 @@ import lombok.NoArgsConstructor;
 @Component
 
 public class CartRequest {
-	Integer userId;
+	String userId;
 	CartItem item;
 }

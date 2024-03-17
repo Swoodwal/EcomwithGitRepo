@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,12 +41,13 @@ public class CartController {
 	
 //	Fetch cart by userid, defined in cart repo
 	@GetMapping("/{userId}")
-	public List<CartResponse> getCartByUserId(@PathVariable Integer userId)
+	public List<CartResponse> getCartByUserId(@PathVariable String userId)
 	{
 		return cartservice.getCartByUserId(userId);
 	}
 	
 //	create a new cart and add a new item to it
+//    @CrossOrigin(origins = "*")
 	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createCart(@RequestBody CartRequest cartrequest )
@@ -61,10 +64,16 @@ public class CartController {
         }
 	}
 	
+	@DeleteMapping("/delete/{userId}")
+	public void deleteItem(@PathVariable String userId,@RequestBody String productId)
+	{
+		cartservice.deleteItem(userId,productId);
+	}
+	
 //	add new item to existing cart found by userid
     @PutMapping("update/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateCart(@PathVariable Integer userId, @RequestBody CartItem item) {
+    public void updateCart(@PathVariable String userId, @RequestBody CartItem item) {
         // Call the service method to update the cart by user ID and add an item
         cartservice.updateCartByUserId(userId, item);
     }

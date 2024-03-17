@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {"com"})
@@ -14,7 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan("com.example.demo.Services")
 @EntityScan("com.example.demo.models")
 @ComponentScan("com.example.demo.dto")
-
+//@CrossOrigin("*")
 public class CartServiceApplication {
 
 	public static void main(String[] args) {
