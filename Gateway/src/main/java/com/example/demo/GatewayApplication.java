@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-
+@CrossOrigin(origins = "*")
 public class GatewayApplication {
 	
 	  @Bean
