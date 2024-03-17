@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -49,6 +50,30 @@ public class ProductService {
                 .quantity(product.getQuantity())
                 .ratings(product.getRatings())
                 .build();
+    }
+
+    public ProductResponse findProductByName(String name) {
+
+        Optional<Product> product = productRepository.findByName(name);
+        Product prod = product.isPresent() ? product.get() : null;
+        return ProductResponse.builder()
+                .id(prod.getId())
+                .name(prod.getName())
+                .price(prod.getPrice())
+                .quantity(prod.getQuantity())
+                .imageUrl(prod.getImageUrl())
+                .build();
+    }
+
+    public void updateProduct(String name, ProductRequest productRequest) {
+        Optional<Product> product = productRepository.findByName(name);
+        Product existingProduct = product.get();
+        System.out.println(existingProduct);
+        existingProduct.setName(productRequest.getName());
+        existingProduct.setPrice(productRequest.getPrice());
+        existingProduct.setQuantity(productRequest.getQuantity());
+        existingProduct.setImageUrl(productRequest.getImageUrl());
+        productRepository.save(existingProduct);
     }
 
 }
