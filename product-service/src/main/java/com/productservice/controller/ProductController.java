@@ -34,4 +34,15 @@ public class ProductController {
     public List<ProductResponse> getAllProduct(){
         return productService.getAllProducts();
     }
+
+    @GetMapping("/{name}")
+    public ProductResponse getProduct(@PathVariable String name){
+        return productService.findProductByName(name);
+    }
+
+    @PutMapping("/{name}")
+    public String updateProduct(@PathVariable String name, @RequestBody ProductRequest productRequest){
+        productService.updateProduct(name, productRequest);
+        return "Product updated";
+    }
 }
