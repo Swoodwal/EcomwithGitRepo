@@ -44,7 +44,6 @@ public class ProductService {
         return ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
-//                .description(product.getDescription())
                 .price(product.getPrice())
                 .imageUrl(product.getImageUrl())
                 .quantity(product.getQuantity())
