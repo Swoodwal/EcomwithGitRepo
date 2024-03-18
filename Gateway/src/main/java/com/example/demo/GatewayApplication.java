@@ -32,6 +32,9 @@ public class GatewayApplication {
 	    .route("cart", r -> r.path("/cart/**")
 	  	      .filters(f -> f.stripPrefix(1))
 	  	      .uri("http://localhost:9080"))
+	    .route("order", r -> r.path("/order/**")
+		      .filters(f -> f.stripPrefix(1))
+		      .uri("http://localhost:8822"))
 	    .build();
 	  }
 
