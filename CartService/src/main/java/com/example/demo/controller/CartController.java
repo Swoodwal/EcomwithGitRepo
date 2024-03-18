@@ -69,6 +69,12 @@ public class CartController {
 	{
 		cartservice.deleteItem(userId,productId);
 	}
+
+	@DeleteMapping("/delete/cart/{userId}")
+	public void deleteCart(@PathVariable String userId)
+	{
+		cartservice.deleteCart(userId);
+	}
 	
 //	add new item to existing cart found by userid
     @PutMapping("update/{userId}")
