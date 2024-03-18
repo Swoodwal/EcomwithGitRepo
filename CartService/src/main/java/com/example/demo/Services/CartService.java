@@ -103,5 +103,10 @@ public class CartService {
 		}
 		cartrepository.save(cart);
 	}
+	public void deleteCart(String userId)
+	{
+		System.out.println("Running inside deletecart");
+		cartrepository.deleteByUserId(userId);
+	}
 
 }
