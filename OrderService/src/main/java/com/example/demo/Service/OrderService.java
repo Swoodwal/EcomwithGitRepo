@@ -20,7 +20,21 @@ import com.example.demo.dto.OrderResponse;
 public class OrderService {
 	@Autowired
 	OrderRepo orderrepository;
+
+	private final WebClient webClient;
+	public OrderService(WebClient.Builder webClientBuilder) {
+		this.webClient = webClientBuilder.baseUrl("http://localhost:8060/cart/api/cart").build();
+	}
 	
+    public Void deleteCartItem(String userId) {
+    	System.out.println("Inside function");
+         webClient.delete()
+         .uri("/delete/cart/{userId}",userId)
+		 .retrieve()
+		 .bodyToMono(Void.class)
+         .subscribe();
+		return null;
+    }
 	
 
 	public OrderResponse returnOrders(String userId)
@@ -34,7 +48,7 @@ public class OrderService {
 		return response;
 	}
 	
-	public void createOrder(OrderRequest orderrequest )
+		public void createOrder(OrderRequest orderrequest )
 	{
 		System.out.println("orderequest "+orderrequest);
 		Orders order1=orderrepository.findOrderByUserId(orderrequest.getUserId());
@@ -75,8 +89,15 @@ public class OrderService {
 	        }
 	        ol.setOrderDetails(orderdetails);
 	        order.getOrdersList().add(ol);
-	//
+			System.out.print("Calling function");
+	        deleteCartItem(orderrequest.getUserId());
+	        System.out.print("After function");
 	        orderrepository.save(order);
+	        
+//	        String url = "http://localhost:8060/cart/api/cart/deleteCart/"+orderrequest.getUserId();
+//	        
+//	        // Send DELETE request
+//	        restTemplate.exchange(url, HttpMethod.DELETE, null, Void.class);
 		}
 		else
 		{
@@ -114,8 +135,10 @@ public class OrderService {
 		      }
 		      ol.setOrderDetails(orderdetails);
 		      order1.getOrdersList().add(ol);
+		      deleteCartItem(orderrequest.getUserId());
 		      orderrepository.deleteByUserId(order.getUserId());;
 		      orderrepository.save(order1);
 		
     }
 }
+
